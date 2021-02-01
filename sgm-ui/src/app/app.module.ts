@@ -12,21 +12,29 @@ import { CidadaoIptuComponent } from './cidadao-iptu/cidadao-iptu.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatInputModule} from '@angular/material/input';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { CidadaoIptuRetornoComponent } from './cidadao-iptu-retorno/cidadao-iptu-retorno.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CidadaoIptuComponent
+    CidadaoIptuComponent,
+    CidadaoIptuRetornoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
     MatGridListModule,
     MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     NgbModule
   ],
   providers: [],
