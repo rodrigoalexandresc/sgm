@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ModCidadao.Models;
@@ -9,7 +10,8 @@ namespace ModCidadao.Controllers {
     public class ImpostoController: ControllerBase 
     {
         public async Task<IActionResult> Get([FromBody]ImpostoQuery consulta) {
-            
+
+            Console.WriteLine("TESTE");
             if (!consulta.IsValid()) {
                 return BadRequest(consulta.Errors());
             }
