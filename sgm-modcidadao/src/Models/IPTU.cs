@@ -3,7 +3,12 @@ using System;
 namespace ModCidadao.Models {
 
     [Serializable]
-    public class Imposto {
+    public class IPTU {
+        public IPTU()
+        {
+            
+        }
+
         public int Id { get; set; }
         public decimal Valor { get; set; }
         public string InscricaoImovel { get; set; }
@@ -14,7 +19,7 @@ namespace ModCidadao.Models {
         public decimal AreaTerreno { get; set; }
     }
 
-    public class ImpostoChave
+    public class IPTUChave
     {
         public static string GerarChave(string InscricaoImovel, DateTime DataVencimento)
         {

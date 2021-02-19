@@ -1,0 +1,13 @@
+version: "3.4"
+
+services:
+  dbmodcidadao:
+    image: postgres
+    environment: 
+      POSTGRES_PASSWORD: "Postgres2021!"
+    ports: 
+      - 15433:5432
+    volumes: 
+      - C:\postgres\dbmodcidadao:/var/lib/postgresql/data
+
+    

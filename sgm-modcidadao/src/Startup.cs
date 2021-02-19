@@ -6,11 +6,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ModCidadao.Models;
+using ModCidadao.Repositories;
 using ModCidadao.Services;
 
 namespace ModCidadao
@@ -27,13 +30,21 @@ namespace ModCidadao
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHostedService<ImpostoCalculadoService>();      
+            //services.AddHostedService<ImpostoCalculadoService>();      
+
+            //var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+            var connectionString = "Server=localhost;Port=15433;Database=cidadao;User Id=postgres;Password=Postgres2021!";
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ModCidadao", Version = "v1" });
-            });                        
+            });                       
+
+            services.AddDbContext<ModCidadaoDbContext>(options => 
+                options.UseNpgsql(connectionString));
+
+            services.AddScoped<IPTURepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
