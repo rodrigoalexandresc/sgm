@@ -3,34 +3,44 @@
     <mat-card-title><p>Consulta de IPTU / ITR</p></mat-card-title>
     <mat-card-content>
         <form class="formIPTU" [formGroup]="formConsulta" (ngSubmit)="onSubmit()">
-            <p>
+            <span>
                 <mat-form-field appearance="fill">
                 <mat-label>CPF/CNPJ</mat-label>
                 <input matInput placeholder="Digite CPF ou CNPJ" formControlName="CPFouCNPJ">
                 </mat-form-field>
-            </p>
+            </span>
           
-            <p>
+            <span>
                 <mat-form-field appearance="fill">
                 <mat-label>Inscrição do imóvel</mat-label>
-                <input matInput placeholder="Digite a Inscrição do imóvel" formControlName="Inscricao">
+                <input matInput placeholder="Digite a Inscrição do imóvel" formControlName="InscricaoImovel">
                 </mat-form-field>
-            </p>
+            </span>
 
-            <p>
+            <span>
                 <mat-form-field appearance="fill">
                     <input matInput [matDatepicker]="picker" formControlName="DataConsulta">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-            </p>
+            </span>
 
-            <p>
+            <span>
                 <button mat-button type="submit">Pesquisar</button>
-            </p>
-              <!-- <mat-form-field>            
-                <input matInput placeholder="Digite a data de consulta" value="DataConulta">
-              </mat-form-field>               -->
+            </span>
+
+            <table mat-table [dataSource]="iptus$ | async">
+                <ng-container matColumnDef="DataVencimento">
+                    <mat-header-cell *matHeaderCellDef> Vencimento </mat-header-cell>
+                    <mat-cell *matCellDef="let data"> {{data.DataVencimento | date: 'dd/MM/yyyy'}} </mat-cell>
+                  </ng-container>       
+                  <ng-container matColumnDef="Valor">
+                    <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+                    <mat-cell *matCellDef="let data">{{data.Valor | currency:'BRL'}}</mat-cell>
+                  </ng-container>  
+                  <mat-header-row *matHeaderRowDef="['DataVencimento', 'Valor']"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: ['DataVencimento', 'Valor']"></mat-row>                  
+            </table>
         </form>
     </mat-card-content>
 </mat-card>
