@@ -11,8 +11,12 @@ import { IPTUService } from './cidado-iptu.service';
 })
 export class CidadaoIptuComponent implements OnInit {
 
+<<<<<<< HEAD
   formConsulta: FormGroup;
   iptus$: Observable<any>;
+=======
+  formConsulta: FormGroup;  
+>>>>>>> b3844b8e8cea98143231574845acb8a902e248f4
 
   constructor(private fb: FormBuilder, private router: Router, private iptuService: IPTUService ) { }  
 

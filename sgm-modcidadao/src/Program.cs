@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ModCidadao.Services;
 
 namespace ModCidadao
 {
@@ -20,7 +22,12 @@ namespace ModCidadao
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>()
+                    .UseUrls("https://*:5001");
+                })
+                .ConfigureServices(s => {
+
+                    s.AddHostedService<ImpostoCalculadoService>();
                 });
     }
 }
