@@ -3,30 +3,30 @@
     <mat-card-title><p>Consulta de IPTU / ITR</p></mat-card-title>
     <mat-card-content>
         <form class="formIPTU" [formGroup]="formConsulta" (ngSubmit)="onSubmit()">
-            <p>
+            <span>
                 <mat-form-field appearance="fill">
                 <mat-label>CPF/CNPJ</mat-label>
                 <input matInput placeholder="Digite CPF ou CNPJ" formControlName="CPFouCNPJ">
                 </mat-form-field>
-            </p>
+            </span>
           
-            <p>
+            <span>
                 <mat-form-field appearance="fill">
                 <mat-label>Inscrição do imóvel</mat-label>
                 <input matInput placeholder="Digite a Inscrição do imóvel" formControlName="Inscricao">
                 </mat-form-field>
-            </p>
+            </span>
 
-            <p>
+            <span>
                 <mat-form-field appearance="fill">
                     <input matInput [matDatepicker]="picker" formControlName="DataConsulta">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
-            </p>
+            </span>
 
             <p>
-                <button mat-button type="submit">Pesquisar</button>
+                <button mat-button type="submit">Pesquisard</button>
             </p>
               <!-- <mat-form-field>            
                 <input matInput placeholder="Digite a data de consulta" value="DataConulta">

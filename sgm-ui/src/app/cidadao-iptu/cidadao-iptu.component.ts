@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CidadaoIptuComponent implements OnInit {
 
-  formConsulta: FormGroup;
+  formConsulta: FormGroup;  
 
   constructor(private fb: FormBuilder, private router: Router) { }  
 

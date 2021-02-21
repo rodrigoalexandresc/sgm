@@ -12,6 +12,8 @@ namespace ModCidadao.Services
 {
     public class ImpostoCalculadoService : BackgroundService
     {
+        const string topico = "stur_imposto_calculado";
+
         private readonly IServiceScopeFactory scopeFactory;
 
         public ImpostoCalculadoService(IServiceScopeFactory scopeFactory)
@@ -42,27 +44,33 @@ namespace ModCidadao.Services
 
             using (var c = new ConsumerBuilder<Ignore, string>(conf).Build())
             {
-                c.Subscribe("stur_imposto_calculado");
+                c.Subscribe(topico);
                 var cts = new CancellationTokenSource();
 
-                var iPTURepository = scopeFactory.CreateScope().ServiceProvider.GetRequiredService<IPTURepository>();
+                var iPTUService = scopeFactory.CreateScope().ServiceProvider.GetRequiredService<IPTUService>();
                 try
                 {
                     while (!stoppingToken.IsCancellationRequested)                    
                     {
-                        Console.WriteLine("KAFKA LOOP");
-                        var message = c.Consume(cts.Token);
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.WriteLine($"    Conectando ao tópico: {topico}              " );
+                        var message = c.Consume(cts.Token);                        
                         if (!string.IsNullOrEmpty(message.Message.Value)) {
                             Console.Write($"KAFKA: {message.Message.Value}");                    
                             var IPTU = JsonSerializer.Deserialize<IPTU>(message.Message.Value);
                             //ToDo : chamar service para escolher se grava ou atualiza o valor do imposto
-                            await iPTURepository.Add(IPTU);
+                            await iPTUService.AtualizarImposto(IPTU);
                         }                            
                     }
                 }
                 catch (OperationCanceledException)
                 {
                     c.Close();
+                }
+                catch(Exception) {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Problema ao conectar no Kafka");
                 }
             }
         }
