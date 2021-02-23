@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { IPTUService } from './cidado-iptu.service';
 
 @Component({
   selector: 'app-cidadao-iptu',
@@ -9,21 +11,24 @@ import { Router } from '@angular/router';
 })
 export class CidadaoIptuComponent implements OnInit {
 
-  formConsulta: FormGroup;  
+  formConsulta: FormGroup;
+  iptus$: Observable<any>;
 
-  constructor(private fb: FormBuilder, private router: Router) { }  
+  constructor(private fb: FormBuilder, private router: Router, private iptuService: IPTUService ) { }  
 
   ngOnInit(): void {
     this.formConsulta = this.fb.group({
       CPFouCNPJ: ['', Validators.required],
-      Inscricao: ['', Validators.required],
+      InscricaoImovel: ['', Validators.required],
       DataConsulta: [new Date(), Validators.required]
     })
   }
 
   onSubmit() {
-    console.log(`${JSON.stringify( this.formConsulta.value)}`);
-    this.router.navigate(['/cidadao/iptu/retorno']);    
+    const formData = this.formConsulta.value;
+    this.iptus$ = this.iptuService.obter(formData);
+    // console.log(`${JSON.stringify( this.formConsulta.value)}`);    
+    // this.router.navigate(['/cidadao/iptu/retorno']);    
   }
 
 }
