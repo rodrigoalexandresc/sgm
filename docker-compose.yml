@@ -10,10 +10,21 @@ services:
     volumes: 
       - C:\postgres\dbmodcidadao:/var/lib/postgresql/data
 
+  modgeo_db:
+    image: postgres
+    environment: 
+      POSTGRES_PASSWORD: "Postgres2021!"
+    ports: 
+      - 15434:5432
+    volumes: 
+      - C:\postgres\dbgeo:/var/lib/postgresql/data
+
   modintegracao_zookeeper:
     image: confluentinc/cp-zookeeper
     ports: 
       - "2181:2181"
+    volumes: 
+      - C:\sgmdata\zookeeper:/var/lib/zookeeper
     environment: 
       ZOOKEEPER_CLIENT_PORT: 2181
 
@@ -23,6 +34,8 @@ services:
       - modintegracao_zookeeper
     ports: 
       - "9092:9092"
+    volumes: 
+      - C:\sgmdata\kafka:/var/lib/kafka
     environment: 
       KAFKA_ZOOKEEPER_CONNECT: modintegracao_zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.15.200:9092

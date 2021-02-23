@@ -38,7 +38,6 @@ namespace ModCidadao
 
             services.AddControllers().AddJsonOptions(options => {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
-                //options.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
             services.AddSwaggerGen(c =>
             {

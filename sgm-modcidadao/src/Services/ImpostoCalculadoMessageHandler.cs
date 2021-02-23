@@ -12,7 +12,7 @@ namespace ModCidadao.Services
 {
     public class ImpostoCalculadoService : BackgroundService
     {
-        const string topico = "stur_imposto_calculado";
+        const string topico = "stur-imposto-calculado";
 
         private readonly IServiceScopeFactory scopeFactory;
 
