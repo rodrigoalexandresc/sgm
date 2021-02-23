@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api: 'https://localhost:5001'
+  apicidadao: 'https://localhost:5001',
+  apigeo: 'https://localhost:5002'
 };
 
 /*

@@ -34,12 +34,18 @@
                     <mat-header-cell *matHeaderCellDef> Vencimento </mat-header-cell>
                     <mat-cell *matCellDef="let data"> {{data.DataVencimento | date: 'dd/MM/yyyy'}} </mat-cell>
                   </ng-container>       
+
+                  <ng-container matColumnDef="InscricaoImovel">
+                    <mat-header-cell *matHeaderCellDef> Inscrição Imóvel </mat-header-cell>
+                    <mat-cell *matCellDef="let data"> {{data.InscricaoImovel}} </mat-cell>
+                  </ng-container>                          
+
                   <ng-container matColumnDef="Valor">
                     <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
                     <mat-cell *matCellDef="let data">{{data.Valor | currency:'BRL'}}</mat-cell>
                   </ng-container>  
-                  <mat-header-row *matHeaderRowDef="['DataVencimento', 'Valor']"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: ['DataVencimento', 'Valor']"></mat-row>                  
+                  <mat-header-row *matHeaderRowDef="['DataVencimento', 'InscricaoImovel', 'Valor']"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: ['DataVencimento', 'InscricaoImovel', 'Valor']"></mat-row>                  
             </table>
         </form>
     </mat-card-content>

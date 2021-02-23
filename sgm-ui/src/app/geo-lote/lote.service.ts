@@ -4,14 +4,14 @@ import { Observable } from "rxjs";
 import { environment } from "src/environments/environment";
 
 @Injectable()
-export class IPTUService {
+export class LoteService {
     /**
      *
      */
     constructor(private httpClient: HttpClient) {        
     }
 
-    obter(iptuConsulta: any) : Observable<any> {
-        return this.httpClient.post<any>(`${environment.apicidadao}/imposto/consulta`, iptuConsulta);
+    obter(loteConsulta: any) : Observable<any> {
+        return this.httpClient.post<any>(`${environment.apigeo}/lote/consulta`, loteConsulta);
     }
 }

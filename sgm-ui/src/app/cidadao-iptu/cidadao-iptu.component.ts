@@ -7,7 +7,8 @@ import { IPTUService } from './cidado-iptu.service';
 @Component({
   selector: 'app-cidadao-iptu',
   templateUrl: './cidadao-iptu.component.html',
-  styleUrls: ['./cidadao-iptu.component.scss']
+  styleUrls: ['./cidadao-iptu.component.scss'],
+  providers: [IPTUService]
 })
 export class CidadaoIptuComponent implements OnInit {
 

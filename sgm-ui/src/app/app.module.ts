@@ -20,6 +20,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
+import { GeoLoteComponent } from './geo-lote/geo-lote.component';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -27,7 +28,8 @@ registerLocaleData(localePt, 'pt-BR');
   declarations: [
     AppComponent,
     CidadaoIptuComponent,
-    CidadaoIptuRetornoComponent
+    CidadaoIptuRetornoComponent,
+    GeoLoteComponent
   ],
   imports: [
     BrowserModule,
