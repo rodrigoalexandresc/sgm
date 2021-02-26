@@ -21,6 +21,7 @@ import localePt from '@angular/common/locales/pt';
 import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { GeoLoteComponent } from './geo-lote/geo-lote.component';
+import {MatIconModule} from '@angular/material/icon';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -45,6 +46,7 @@ registerLocaleData(localePt, 'pt-BR');
     MatDatepickerModule,
     MatNativeDateModule,
     MatTableModule,
+    MatIconModule,
     NgbModule
   ],
   providers: 
