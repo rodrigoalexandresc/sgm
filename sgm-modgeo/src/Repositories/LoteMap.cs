@@ -14,19 +14,19 @@ namespace ModGeo.Repositories {
             entityBuilder.Property(x => x.Endereco).HasColumnName("endereco");
             entityBuilder.Property(x => x.InscricaoImovel).HasColumnName("inscricaoimovel");
             entityBuilder.Property(x => x.Ativo).HasColumnName("ativo");
-            entityBuilder.HasMany(x => x.Historicos).WithOne(x => x.Lote).HasForeignKey(o => o.LoteId).OnDelete(DeleteBehavior.Cascade);
         }        
     }
 
     public class LoteHistoricoMap {
         public LoteHistoricoMap(EntityTypeBuilder<LoteHistorico> entityBuilder) {
             entityBuilder.HasKey(x => x.Id);
-            entityBuilder.ToTable("lotehistorico");
-
-            entityBuilder.Property(x => x.Id).HasColumnName("id");
+            entityBuilder.ToTable("lotehistorico");            
+            entityBuilder.Property(x => x.Id).HasColumnName("id");           
+            entityBuilder.Property(x => x.LoteId).HasColumnName("loteid");
+            entityBuilder.HasOne(x => x.Lote).WithMany(o => o.Historicos);
             entityBuilder.Property(x => x.AreaConstruida).HasColumnName("areaconstruida");
             entityBuilder.Property(x => x.AreaTerreno).HasColumnName("areaterreno");
-            entityBuilder.Property(x => x.DataAtualizacao).HasColumnName("dataatualizacao");
+            entityBuilder.Property(x => x.DataAtualizacao).HasColumnName("dataatualizacao");            
         }
     }
 }

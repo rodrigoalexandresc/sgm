@@ -9,6 +9,7 @@ namespace ModGeo.Repositories {
         }
 
         public DbSet<Lote> Lotes { get; set; }
+        public DbSet<LoteHistorico> Historicos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);

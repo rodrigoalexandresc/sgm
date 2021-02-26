@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace ModGeo.Repositories {
         public async Task Add(Lote lote) {
             dbContext.Lotes.Add(lote);
             await dbContext.SaveChangesAsync();
-        }        
+        }
 
         public async Task Update(Lote lote) {
             var reg = dbContext.Update(lote);
@@ -31,6 +32,21 @@ namespace ModGeo.Repositories {
                 || w.Endereco.Contains(loteQuery.Endereco) 
                 || w.GeoId == loteQuery.GeoId);
             return await data.ToListAsync();
+        }
+
+        public async Task<IList<LoteHistorico>> GetHistoricos(int loteId) {
+            return await dbContext.Historicos.Where(h => h.LoteId == loteId).ToListAsync();
+        }
+
+        public async Task<LoteHistorico> GetUlitmoLoteHistorico(int loteId) {
+            //var lote = await dbContext.Lotes.FirstOrDefaultAsync(l => l.Id == loteId);
+            var historicos = await dbContext.Historicos.Where(o => o.LoteId == loteId).ToListAsync();
+            return historicos.OrderByDescending(o => o.DataAtualizacao).FirstOrDefault();
+        }
+
+        public async Task AddHistorico(LoteHistorico loteHistorico) {
+            dbContext.Historicos.Add(loteHistorico);
+            await dbContext.SaveChangesAsync();
         }
     }
 }

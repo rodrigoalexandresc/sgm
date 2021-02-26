@@ -12,7 +12,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using ModGeo.Models;
 using ModGeo.Repositories;
+using ModGeo.Services;
 
 namespace ModGeo
 {
@@ -31,6 +33,9 @@ namespace ModGeo
             //var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
             var connectionString = "Server=localhost;Port=15434;Database=geo;User Id=postgres;Password=Postgres2021!";
 
+            services.AddOptions();
+            services.Configure<KafkaConfig>(Configuration.GetSection("Kafka"));
+
             services.AddControllers().AddJsonOptions(options => {
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
@@ -44,6 +49,8 @@ namespace ModGeo
                 options.UseNpgsql(connectionString));
 
             services.AddScoped<LoteRepository>();
+            services.AddScoped<LoteService>();
+            services.AddScoped<LoteAtualizadoMessageProducer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
