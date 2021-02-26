@@ -14,4 +14,12 @@ export class LoteService {
     obter(loteConsulta: any) : Observable<any> {
         return this.httpClient.post<any>(`${environment.apigeo}/lote/consulta`, loteConsulta);
     }
+
+    obterDadosAtualizar(loteId: number): Observable<any> {
+        return this.httpClient.get<any>(`${environment.apigeo}/lote/ultimohistorico/${loteId}`);
+    }
+
+    salvarDadosLote(loteHistorico: any): Observable<any> {
+        return this.httpClient.post<any>(`${environment.apigeo}/lote/historico`, loteHistorico);
+    }
 }

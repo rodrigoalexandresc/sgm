@@ -12,8 +12,13 @@ import { LoteService } from './lote.service';
 })
 export class GeoLoteComponent implements OnInit {
 
+  idLoteEmAtualizacao: number;
+
   formConsulta: FormGroup;
   lotes$: Observable<any>;
+
+  formLoteAtualizar: FormGroup;
+  exibeLoteAtualizar: boolean = false;
 
   constructor(private fb: FormBuilder, private router: Router, private loteService: LoteService ) { }  
 
@@ -23,6 +28,7 @@ export class GeoLoteComponent implements OnInit {
       InscricaoImovel: ['', Validators.required],
       GeoId: [null, Validators.required]
     })
+
   }
 
   onSubmit() {
@@ -30,6 +36,32 @@ export class GeoLoteComponent implements OnInit {
     this.lotes$ = this.loteService.obter(formData);
     // console.log(`${JSON.stringify( this.formConsulta.value)}`);    
     // this.router.navigate(['/cidadao/iptu/retorno']);    
+  }
+
+  atualizar(loteId: number) {
+    this.loteService.obterDadosAtualizar(loteId).subscribe(data => this.criarFormAtualizar(data))
+  }
+
+  criarFormAtualizar(data: any) {
+    this.idLoteEmAtualizacao = data.Id;
+    this.formLoteAtualizar = this.fb.group({
+      Id: [data.Id],
+      AreaConstruida: [data.AreaConstruida, Validators.required],
+      AreaTerreno: [data.AreaTerreno, Validators.required]
+    });
+
+    this.exibeLoteAtualizar = true;
+  }
+
+  onSubmitLoteAtualizar() {
+    if (!this.formLoteAtualizar.valid) return;
+    const loteHistorico = this.formLoteAtualizar.value;
+    this.loteService.salvarDadosLote(loteHistorico).subscribe(data => this.fecharFormAtualizacao())
+  }
+
+  fecharFormAtualizacao() {
+    this.formLoteAtualizar = null;
+    this.exibeLoteAtualizar = false;
   }
 
 }
