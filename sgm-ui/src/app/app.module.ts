@@ -22,6 +22,8 @@ import {MatTableModule} from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { GeoLoteComponent } from './geo-lote/geo-lote.component';
 import {MatIconModule} from '@angular/material/icon';
+import { GeoMapaComponent } from './geo-mapa/geo-mapa.component';
+import {MatTreeModule} from '@angular/material/tree'
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -30,7 +32,8 @@ registerLocaleData(localePt, 'pt-BR');
     AppComponent,
     CidadaoIptuComponent,
     CidadaoIptuRetornoComponent,
-    GeoLoteComponent
+    GeoLoteComponent,
+    GeoMapaComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ registerLocaleData(localePt, 'pt-BR');
     MatNativeDateModule,
     MatTableModule,
     MatIconModule,
+    MatTreeModule,
     NgbModule
   ],
   providers: 

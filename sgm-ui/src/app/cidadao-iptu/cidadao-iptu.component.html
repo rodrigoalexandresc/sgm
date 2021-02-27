@@ -1,6 +1,7 @@
 <hr>
 <mat-card style="width: 100%">
     <mat-card-title><p>Consulta de IPTU / ITR</p></mat-card-title>
+    <mat-card-subtitle>Filtros</mat-card-subtitle>    
     <mat-card-content>
         <form class="formIPTU" [formGroup]="formConsulta" (ngSubmit)="onSubmit()">
             <span>
@@ -28,25 +29,27 @@
             <span>
                 <button mat-button type="submit">Pesquisar</button>
             </span>
-
-            <table mat-table [dataSource]="iptus$ | async">
-                <ng-container matColumnDef="DataVencimento">
-                    <mat-header-cell *matHeaderCellDef> Vencimento </mat-header-cell>
-                    <mat-cell *matCellDef="let data"> {{data.DataVencimento | date: 'dd/MM/yyyy'}} </mat-cell>
-                  </ng-container>       
-
-                  <ng-container matColumnDef="InscricaoImovel">
-                    <mat-header-cell *matHeaderCellDef> Inscrição Imóvel </mat-header-cell>
-                    <mat-cell *matCellDef="let data"> {{data.InscricaoImovel}} </mat-cell>
-                  </ng-container>                          
-
-                  <ng-container matColumnDef="Valor">
-                    <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
-                    <mat-cell *matCellDef="let data">{{data.Valor | currency:'BRL'}}</mat-cell>
-                  </ng-container>  
-                  <mat-header-row *matHeaderRowDef="['DataVencimento', 'InscricaoImovel', 'Valor']"></mat-header-row>
-                  <mat-row *matRowDef="let row; columns: ['DataVencimento', 'InscricaoImovel', 'Valor']"></mat-row>                  
-            </table>
         </form>
+    </mat-card-content>
+    <mat-card-subtitle>Resultados da pesquisa</mat-card-subtitle>    
+    <mat-card-content>
+        <table mat-table [dataSource]="iptus$ | async">
+            <ng-container matColumnDef="DataVencimento">
+                <mat-header-cell *matHeaderCellDef> Vencimento </mat-header-cell>
+                <mat-cell *matCellDef="let data"> {{data.DataVencimento | date: 'dd/MM/yyyy'}} </mat-cell>
+              </ng-container>       
+
+              <ng-container matColumnDef="InscricaoImovel">
+                <mat-header-cell *matHeaderCellDef> Inscrição Imóvel </mat-header-cell>
+                <mat-cell *matCellDef="let data"> {{data.InscricaoImovel}} </mat-cell>
+              </ng-container>                          
+
+              <ng-container matColumnDef="Valor">
+                <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+                <mat-cell *matCellDef="let data">{{data.Valor | currency:'BRL'}}</mat-cell>
+              </ng-container>  
+              <mat-header-row *matHeaderRowDef="['DataVencimento', 'InscricaoImovel', 'Valor']"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: ['DataVencimento', 'InscricaoImovel', 'Valor']"></mat-row>                  
+        </table>
     </mat-card-content>
 </mat-card>
