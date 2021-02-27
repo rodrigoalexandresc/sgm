@@ -1,5 +1,5 @@
 namespace ModGeo.Models {
     public class KafkaConfig {
-        public string BootstrapServices { get; set; }
+        public string BootstrapServers { get; set; }
     }
 }

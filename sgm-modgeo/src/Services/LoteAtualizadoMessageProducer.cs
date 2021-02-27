@@ -9,10 +9,14 @@ namespace ModGeo.Services {
         const string topicName = "modgeo-lote-atualizado";
 
         private readonly IOptions<KafkaConfig> kafkaConfig;
+        public LoteAtualizadoMessageProducer(IOptions<KafkaConfig> kafkaConfig)
+        {
+            this.kafkaConfig = kafkaConfig;
+        }
 
         public async Task SendMessage(LoteMessage loteMessage) {
             var historicoJson = JsonSerializer.Serialize(loteMessage);
-            var config = new ProducerConfig { BootstrapServers =  kafkaConfig.Value.BootstrapServices };
+            var config = new ProducerConfig { BootstrapServers =  kafkaConfig.Value.BootstrapServers };
             var producerBuilder = new ProducerBuilder<Null, string>(config);
 
             using (var producer = producerBuilder.Build()) {
