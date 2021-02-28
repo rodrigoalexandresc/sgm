@@ -45,7 +45,8 @@ export class GeoLoteComponent implements OnInit {
   criarFormAtualizar(data: any) {
     this.idLoteEmAtualizacao = data.Id;
     this.formLoteAtualizar = this.fb.group({
-      Id: [data.Id], 
+      Id: [data.Id, Validators.required], 
+      LoteId: [data.LoteId, Validators.required],
       AreaConstruida: [data.AreaConstruida, Validators.required],
       AreaTerreno: [data.AreaTerreno, Validators.required]
     });
@@ -56,7 +57,9 @@ export class GeoLoteComponent implements OnInit {
   onSubmitLoteAtualizar() {
     if (!this.formLoteAtualizar.valid) return;
     const loteHistorico = this.formLoteAtualizar.value;
-    this.loteService.salvarDadosLote(loteHistorico).subscribe(data => this.fecharFormAtualizacao())
+    this.loteService.salvarDadosLote(loteHistorico).subscribe(data => {
+      this.fecharFormAtualizacao();
+    })
   }
 
   fecharFormAtualizacao() {
