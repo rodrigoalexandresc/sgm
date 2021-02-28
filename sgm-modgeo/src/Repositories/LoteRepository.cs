@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ModGeo.Models;
@@ -49,7 +50,7 @@ namespace ModGeo.Repositories {
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task SetarDataIntegracao(LoteHistorico loteHistorico, DateTime dataIntegracao) {        
+        public async Task SetarDataIntegracao(LoteHistorico loteHistorico, DateTime dataIntegracao) { 
             loteHistorico.DataIntegracao = dataIntegracao;   
             dbContext.Historicos.Update(loteHistorico);
             await dbContext.SaveChangesAsync();

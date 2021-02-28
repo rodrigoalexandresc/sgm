@@ -40,7 +40,7 @@ namespace ModGeo.Controllers {
         [HttpPost("historico")]
         public async Task<IActionResult> SalvarHistorico(LoteHistorico loteHistorico) {
             await loteService.AtualizarLote(loteHistorico);
-            return Ok("Lote atualizado com sucesso");
+            return Ok();
         }
     }
 }
