@@ -45,7 +45,7 @@ export class GeoLoteComponent implements OnInit {
   criarFormAtualizar(data: any) {
     this.idLoteEmAtualizacao = data.Id;
     this.formLoteAtualizar = this.fb.group({
-      Id: [data.Id],
+      Id: [data.Id], 
       AreaConstruida: [data.AreaConstruida, Validators.required],
       AreaTerreno: [data.AreaTerreno, Validators.required]
     });
