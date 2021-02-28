@@ -10,12 +10,16 @@ namespace ModGeo.Repositories {
 
         public DbSet<Lote> Lotes { get; set; }
         public DbSet<LoteHistorico> Historicos { get; set; }
+        public DbSet<Mapa> Mapas { get; set; }
+        public DbSet<MapaArquivo> MapasComArquivo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
             
             new LoteMap(modelBuilder.Entity<Lote>());
             new LoteHistoricoMap(modelBuilder.Entity<LoteHistorico>());
+            new MapaMap(modelBuilder.Entity<Mapa>());
+            new MapaArquivoMap(modelBuilder.Entity<MapaArquivo>());
         }
     }
 }

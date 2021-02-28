@@ -51,6 +51,9 @@ namespace ModGeo
             services.AddScoped<LoteRepository>();
             services.AddScoped<LoteService>();
             services.AddScoped<LoteAtualizadoMessageProducer>();
+
+            services.AddScoped<MapaRepository>();
+            services.AddScoped<MapaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
