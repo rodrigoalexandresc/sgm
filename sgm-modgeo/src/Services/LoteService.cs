@@ -25,6 +25,8 @@ namespace ModGeo.Services {
             await loteRepository.AddHistorico(loteHistorico);        
             var loteMessage = new LoteMessage(lote, loteHistorico);
             await loteAtualizadoMessageProducer.SendMessage(loteMessage);
+            await loteRepository.SetarDataIntegracao(loteHistorico, DateTime.Now);
+
         }
     }
 }

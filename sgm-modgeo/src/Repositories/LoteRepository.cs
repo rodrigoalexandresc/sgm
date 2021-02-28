@@ -48,5 +48,17 @@ namespace ModGeo.Repositories {
             dbContext.Historicos.Add(loteHistorico);
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task SetarDataIntegracao(LoteHistorico loteHistorico, DateTime dataIntegracao) {        
+            loteHistorico.DataIntegracao = dataIntegracao;   
+            dbContext.Historicos.Update(loteHistorico);
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<LoteHistorico>> ObterHistoricosSemIntegracao() {
+            return await dbContext.Historicos
+                .Include(i => i.Lote)
+                .Where(h => !h.DataIntegracao.HasValue).ToListAsync();
+        }
     }
 }

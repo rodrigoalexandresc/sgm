@@ -19,6 +19,7 @@ namespace ModGeo.Models {
         public decimal AreaTerreno { get; set; }
         public decimal AreaConstruida { get; set; }
         public DateTime DataAtualizacao { get; set; }  
+        public DateTime? DataIntegracao { get; set; }
     }
 
     [Serializable]

@@ -4,8 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ModGeo.Services;
 
 namespace ModGeo
 {
@@ -22,6 +24,9 @@ namespace ModGeo
                 {
                     webBuilder.UseStartup<Startup>()
                         .UseUrls("https://*:5002");
+                })
+                .ConfigureServices(s => {
+                    s.AddHostedService<LoteHostedService>();
                 });
     }
 }

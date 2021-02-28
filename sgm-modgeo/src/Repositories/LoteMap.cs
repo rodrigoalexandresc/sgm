@@ -26,7 +26,8 @@ namespace ModGeo.Repositories {
             entityBuilder.HasOne(x => x.Lote).WithMany(o => o.Historicos);
             entityBuilder.Property(x => x.AreaConstruida).HasColumnName("areaconstruida");
             entityBuilder.Property(x => x.AreaTerreno).HasColumnName("areaterreno");
-            entityBuilder.Property(x => x.DataAtualizacao).HasColumnName("dataatualizacao");            
+            entityBuilder.Property(x => x.DataAtualizacao).HasColumnName("dataatualizacao"); 
+            entityBuilder.Property(x => x.DataIntegracao).HasColumnName("dataintegracao");           
         }
     }
 }
