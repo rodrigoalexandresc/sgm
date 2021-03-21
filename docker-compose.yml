@@ -1,7 +1,17 @@
 version: "3.4"
 
 services:
-  modcidadao_db:
+  sturdb:
+    image: postgres
+    ports: 
+      - "5432:5432"
+    restart: always
+    volumes: 
+      - C:\postgres\stur:/var/lib/postgresql/data
+    environment: 
+      POSTGRES_PASSWORD: "Postgres2021!"
+
+  modcidadaodb:
     image: postgres
     environment: 
       POSTGRES_PASSWORD: "Postgres2021!"
@@ -10,7 +20,7 @@ services:
     volumes: 
       - C:\postgres\dbmodcidadao:/var/lib/postgresql/data
 
-  modgeo_db:
+  modgeodb:
     image: postgres
     environment: 
       POSTGRES_PASSWORD: "Postgres2021!"
