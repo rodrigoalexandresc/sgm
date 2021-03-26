@@ -1,0 +1,56 @@
+version: "3.4"
+
+services:
+  sturdb:
+    image: postgres
+    ports: 
+      - "5432:5432"
+    restart: always
+    volumes: 
+      - C:\postgres\stur:/var/lib/postgresql/data
+    environment: 
+      POSTGRES_PASSWORD: "Postgres2021!"
+
+  modcidadaodb:
+    image: postgres
+    environment: 
+      POSTGRES_PASSWORD: "Postgres2021!"
+    ports: 
+      - 15433:5432
+    volumes: 
+      - C:\postgres\dbmodcidadao:/var/lib/postgresql/data
+  
+  modgeodb:
+    image: postgres
+    environment: 
+      POSTGRES_PASSWORD: "Postgres2021!"
+    ports: 
+      - 15434:5432
+    volumes: 
+      - C:\postgres\dbgeo:/var/lib/postgresql/data
+  
+  modintegracao_zookeeper:
+    image: confluentinc/cp-zookeeper
+    ports: 
+      - "2181:2181"
+    volumes: 
+      - C:\zookeeper:/var/lib/zookeeper
+    environment: 
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  modintegracao_kafka:
+    image: confluentinc/cp-kafka
+    depends_on: 
+      - modintegracao_zookeeper
+    ports: 
+      - "9092:9092"
+    volumes: 
+      - C:\kafka:/var/lib/kafka
+    environment: 
+      KAFKA_ZOOKEEPER_CONNECT: modintegracao_zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://192.168.15.200:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+      KAFKA_BROKER_ID: 1
+      KAFKA_MIN_INSYNC_REPLICAS: 1
+      PRODUCER_ACKS: all
