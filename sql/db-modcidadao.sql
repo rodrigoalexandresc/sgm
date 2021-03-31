@@ -1,9 +1,3 @@
-begin;
-
-
--- SET AUTOCOMMIT = ON;
--- CREATE DATABASE cidadao;
-
 DROP TABLE IF EXISTS iptu;
 
 CREATE TABLE iptu (
@@ -23,5 +17,3 @@ INSERT INTO iptu (cpfoucnpj, valor, inscricaoimovel, datavencimento, chave, desc
 ('35837615881', 60*3.5, '30014444', '2021-2-6', '30014444-20210206', '', 60, 140),
 ('35837615881', 100*3.5, '30054444', '2021-2-6', '30054444-20210206', '', 100, 140);
 
-
-SELECT * FROM iptu;

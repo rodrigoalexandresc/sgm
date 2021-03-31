@@ -1,0 +1,107 @@
+version: "3.4"
+
+services:  
+  modintegracao_zookeeper:
+    image: confluentinc/cp-zookeeper
+    ports: 
+      - "2181:2181"
+    volumes: 
+      - C:\sgmdata\zookeeper:/var/lib/zookeeper
+    environment: 
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  modintegracao_kafka:
+    image: confluentinc/cp-kafka
+    depends_on: 
+      - modintegracao_zookeeper
+    ports: 
+      - "9092:9092"
+      - "19092:19092"
+      - "29092:29092"
+    volumes: 
+      - C:\sgmdata\kafka:/var/lib/kafka
+    environment: 
+      KAFKA_ZOOKEEPER_CONNECT: modintegracao_zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://modintegracao_kafka:9092,LST1://localhost:19092,LST2://192.168.15.200:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,LST1:PLAINTEXT,LST2:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG_CLEANER_DELETE_RETENTION_MS: 5000
+      KAFKA_BROKER_ID: 1
+      KAFKA_MIN_INSYNC_REPLICAS: 1
+      PRODUCER_ACKS: all
+
+  modgeodb:
+    image: modgeodb-image
+    build: 
+      context: ./db/geo
+      dockerfile: Dockerfile
+    ports: 
+      - 15434:5432
+    volumes: 
+      - C:\sgmdata\postgres\dbgeo:/var/lib/postgresql/data      
+
+  modgeo:
+    image: modgeo-image
+    build: 
+      context: ./api/modgeo
+      dockerfile: Dockerfile
+    ports: 
+      - "5002:5002"
+    depends_on: 
+      - modintegracao_kafka      
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Homologacao
+
+  modcidadaodb:
+    image: modcidadaodb-image
+    build: 
+      context: ./db/cidadao
+      dockerfile: Dockerfile
+    ports: 
+      - 15433:5432
+    volumes: 
+      - C:\sgmdata\postgres\dbmodcidadao:/var/lib/postgresql/data        
+
+  modcidadao:
+    image: modcidadao-image
+    build: 
+      context: ./api/modcidadao
+      dockerfile: Dockerfile
+    ports: 
+      - "5001:5001"
+    depends_on: 
+      - modintegracao_kafka      
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Homologacao                 
+  
+  modui:
+    image: sgm-ui-image
+    build: 
+      context: ./ui
+      dockerfile: Dockerfile
+    ports: 
+      - "80:8080"      
+
+  sturdb:
+    image: sturdb-image
+    build: 
+      context: ./db/stur
+      dockerfile: Dockerfile    
+    ports: 
+      - "5432:5432"
+    restart: always
+    volumes: 
+      - C:\sgmdata\postgres\stur:/var/lib/postgresql/data
+
+  stur:
+    image: stur-image
+    build: 
+      context: ./api/stur
+      dockerfile: Dockerfile
+    ports: 
+      - "6001:6001"
+    depends_on: 
+      - modintegracao_kafka        
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Homologacao           
+

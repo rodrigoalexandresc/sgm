@@ -2,6 +2,8 @@
 WORKDIR /src
 COPY stur2.csproj .
 COPY appsettings.json .
+COPY appsettings.Development.json .
+COPY appsettings.Homologacao.json .
 RUN dotnet restore
 COPY . .
 RUN dotnet publish -c Release -o /app

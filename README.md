@@ -1,8 +1,19 @@
 # sgm
 
-Para rodar em modo desenvolvimento:
-1. Executar docker-compose pasta data
-2. Rodar scripts em cada um dos bancos pasta sql
-3. Executar "dotnet restore" e rodar com "dotnet run" cada um dos serviços: modgeo, modcidadao, stur
-4. Executar "npm install" e rodar com "ng serve" pasta UI
-5. Todos serviços podem executar com Docker alternativamente
+Para rodar a POC
+1. Necessário ter docker/docker-compose instalados e rodando
+2. Executar sgm.bat
+
+Para executar o SGM: http://localhost/
+Para executar o STUR: http://localhost:6001/
+Bancos e Apache estão expostos nas portas descritas no yml
+
+*Em caso de erro:
+- Verifique se o docker está rodando
+- Apague as pasta bin e obj de api/modcidadao/src, api/modgeo/src e api/stur
+
+Alternativamente todos os serviços pode rodar de maneira individual com docker, angular CLI e dotnet CLI:
+api: microserviços + stur
+db: banco de dados
+ui: angular 
+
